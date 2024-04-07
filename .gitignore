@@ -1,0 +1,4 @@
+# carpetas a ignorar
+/.sass-cache
+# archivos a ignorar
+.css.map

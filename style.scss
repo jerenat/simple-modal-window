@@ -1,0 +1,140 @@
+// -- Variables generales
+:root {
+  // -- white
+  --w: #ffffff;
+  --w1: #f1f1f1;
+
+  // -- dark
+  --d01: #666666;
+  --d03: #888888;
+  --d04: #555555;
+  --d1: rgba(0, 0, 0, 0.5);
+  --d2: rgba(0, 0, 0, 0.33);
+
+  // -- gray
+  --g1: #cccccc;
+  --g2: #ebebeb;
+  --g3: #acacac;
+}
+
+// -- funciones
+
+// px to rem
+@function rm($px) {
+  $rem: $px * 0.06;
+  @return $rem + rem;
+}
+
+* {
+  font-family: "Roboto", Helvetica, sans-serif;
+}
+
+body {
+  background-color: var(--w);
+  margin: 0;
+  padding: rm(20);
+}
+
+// -- Fondo del modal
+.modal-background {
+  background-color: var(--d1);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // -- Modal
+  .modal {
+    background-color: var(--w);
+    border: rm(1) solid var(--g1);
+    padding: rm(8) rm(8);
+    border-radius: rm(4) rm(4);
+    width: 40%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    /* -- sombras -- */
+    -webkit-box-shadow: 0rem 0rem rm(20) rm(1) var(--d2);
+    -moz-box-shadow: 0rem 0rem rm(20) rm(1) var(--d2);
+    box-shadow: 0rem 0rem rm(20) rm(1) var(--d2);
+
+    /* -- trasiciones -- */
+    animation-name: show_modal;
+    animation-duration: 0.4s;
+
+    // -- Cabeza del modal
+    .modal-header {
+      background-color: var(--g2);
+      margin: -8px -8px 0 -8px;
+      border-top-left-radius: rm(4);
+      border-top-right-radius: rm(4);
+      border-bottom: rm(1) solid var(--g1);
+      padding: rm(5) rm(9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: all-scroll;
+
+      // -- titulo
+      strong {
+        font-weight: bolder;
+        color: var(--d01);
+      }
+
+      // Botón de cerrado
+      .xmark-btn {
+        &::before {
+          content: "\00D7";
+          font-weight: bold;
+          font-size: rm(22);
+          color: var(--g3);
+          cursor: pointer;
+        }
+      }
+    }
+
+    // -- Cuerpo del modal
+    .modal-body {
+      height: 100%;
+      margin: 0 -8px -8px -8px;
+      overflow-y: auto;
+      // -- webkit-scroll
+      &::-webkit-scrollbar {
+        width: rm(8);
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--w1);
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: var(--d03);
+        border-radius: rm(4);
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: var(--d04);
+      }
+    }
+  }
+}
+
+/* -- animación : mostrar ventana modal -- */
+@keyframes show_modal {
+  from {
+    margin-top: -100px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
